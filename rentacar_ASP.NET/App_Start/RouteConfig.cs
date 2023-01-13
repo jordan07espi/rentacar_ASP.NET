@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace rentacar_ASP.NET
+namespace rentacar_ASPNET
 {
     public class RouteConfig
     {

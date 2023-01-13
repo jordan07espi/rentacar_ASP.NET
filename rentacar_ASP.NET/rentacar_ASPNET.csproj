@@ -128,20 +128,47 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\VerifySession.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\alquiler.cs">
+      <DependentUpon>rentaCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\auto.cs">
+      <DependentUpon>rentaCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cliente.cs">
+      <DependentUpon>rentaCar.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\rentaCar.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rentaCar.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\rentaCar.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rentaCar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\rentaCar.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rentaCar.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\roles.cs">
+      <DependentUpon>rentaCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rolesusuarios.cs">
+      <DependentUpon>rentaCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\usuarios.cs">
+      <DependentUpon>rentaCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModels\Access\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +183,12 @@
     <Content Include="Models\rentaCar.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>rentaCar.Context.cs</LastGenOutput>
+      <DependentUpon>rentaCar.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\rentaCar.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>rentaCar.edmx</DependentUpon>
+      <LastGenOutput>rentaCar.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -163,9 +196,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>rentaCar.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\rentaCar.edmx.diagram">
+    <Content Include="Models\rentaCar.edmx.diagram">
       <DependentUpon>rentaCar.edmx</DependentUpon>
-    </None>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -191,6 +224,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Access\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

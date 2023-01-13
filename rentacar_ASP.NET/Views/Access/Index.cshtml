@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    <form id="frm">
+        <div class="row">
+            <label class="control-label">Usuario</label>
+            <input class="form-control" type="text" name="user" value="" />
+        </div>
+        <br />
+        <div class="row">
+            <label class="control-label">Clave</label>
+            <input class="form-control" type="password" name="pass" value="" />
+        </div>
+        <br />
+        <div class="row">
+            <button class="btn btn-success" type="submit">Ingresar</button>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            $("#frm").submit(function (e) {
+                e.preventDefault();
+                let req = "@Url.Content("~/Access/Enter")";
+                let frm = $(this).serialize();
+
+                $.post(req, frm, function (res) {
+                    if (res == "1") {
+                        document.location.href="@Url.Content("~/Home/Index")";
+                    } else {
+                        alert(res);
+                    }
+                })
+
+            })
+        })
+
+
+    </script>
+
+} 

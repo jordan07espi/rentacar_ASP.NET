@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace rentacar_ASP.NET
+namespace rentacar_ASPNET
 {
     public class BundleConfig
     {

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace rentacar_ASP.NET
+namespace rentacar_ASPNET
 {
     public class MvcApplication : System.Web.HttpApplication
     {
