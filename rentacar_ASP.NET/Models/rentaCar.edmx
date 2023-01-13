@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="rentacarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alquiler">
+          <Key>
+            <PropertyRef Name="idAlquiler" />
+          </Key>
+          <Property Name="idAlquiler" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idAuto" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="fechaAlquiler" Type="date" Nullable="false" />
+          <Property Name="fechaDevolucion" Type="date" Nullable="false" />
+          <Property Name="Precio" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="auto">
+          <Key>
+            <PropertyRef Name="idauto" />
+          </Key>
+          <Property Name="idauto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marca" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="placa" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="estadoAlquiler" Type="smallint" Nullable="false" />
+          <Property Name="fotoAuto" Type="image" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombresCli" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreRol" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rolesusuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idRol" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="fechacreacion" Type="date" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="contraseña" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="estado" Type="smallint" Nullable="false" />
+        </EntityType>
+        <Association Name="alquiler_ibfk_1">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="alquiler" Type="Self.alquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="alquiler">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alquiler_ibfk_2">
+          <End Role="auto" Type="Self.auto" Multiplicity="1" />
+          <End Role="alquiler" Type="Self.alquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="auto">
+              <PropertyRef Name="idauto" />
+            </Principal>
+            <Dependent Role="alquiler">
+              <PropertyRef Name="idAuto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alquiler_ibfk_3">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="alquiler" Type="Self.alquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="alquiler">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rolesusuarios_ibfk_1">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="rolesusuarios" Type="Self.rolesusuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rolesusuarios">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rolesusuarios_ibfk_2">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="rolesusuarios" Type="Self.rolesusuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rolesusuarios">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="rentacarModelStoreContainer">
+          <EntitySet Name="alquiler" EntityType="Self.alquiler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="auto" EntityType="Self.auto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rolesusuarios" EntityType="Self.rolesusuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="alquiler_ibfk_1" Association="Self.alquiler_ibfk_1">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="alquiler" EntitySet="alquiler" />
+          </AssociationSet>
+          <AssociationSet Name="alquiler_ibfk_2" Association="Self.alquiler_ibfk_2">
+            <End Role="auto" EntitySet="auto" />
+            <End Role="alquiler" EntitySet="alquiler" />
+          </AssociationSet>
+          <AssociationSet Name="alquiler_ibfk_3" Association="Self.alquiler_ibfk_3">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="alquiler" EntitySet="alquiler" />
+          </AssociationSet>
+          <AssociationSet Name="rolesusuarios_ibfk_1" Association="Self.rolesusuarios_ibfk_1">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="rolesusuarios" EntitySet="rolesusuarios" />
+          </AssociationSet>
+          <AssociationSet Name="rolesusuarios_ibfk_2" Association="Self.rolesusuarios_ibfk_2">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="rolesusuarios" EntitySet="rolesusuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="rentacarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="alquiler">
+          <Key>
+            <PropertyRef Name="idAlquiler" />
+          </Key>
+          <Property Name="idAlquiler" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idAuto" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="fechaAlquiler" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaDevolucion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Precio" Type="Single" Nullable="false" />
+          <NavigationProperty Name="cliente" Relationship="Self.alquiler_ibfk_1" FromRole="alquiler" ToRole="cliente" />
+          <NavigationProperty Name="auto" Relationship="Self.alquiler_ibfk_2" FromRole="alquiler" ToRole="auto" />
+          <NavigationProperty Name="usuarios" Relationship="Self.alquiler_ibfk_3" FromRole="alquiler" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="auto">
+          <Key>
+            <PropertyRef Name="idauto" />
+          </Key>
+          <Property Name="idauto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marca" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="placa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estadoAlquiler" Type="Int16" Nullable="false" />
+          <Property Name="fotoAuto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="alquiler" Relationship="Self.alquiler_ibfk_2" FromRole="auto" ToRole="alquiler" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombresCli" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cedula" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="alquiler" Relationship="Self.alquiler_ibfk_1" FromRole="cliente" ToRole="alquiler" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreRol" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rolesusuarios" Relationship="Self.rolesusuarios_ibfk_1" FromRole="roles" ToRole="rolesusuarios" />
+        </EntityType>
+        <EntityType Name="rolesusuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="fechacreacion" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="roles" Relationship="Self.rolesusuarios_ibfk_1" FromRole="rolesusuarios" ToRole="roles" />
+          <NavigationProperty Name="usuarios" Relationship="Self.rolesusuarios_ibfk_2" FromRole="rolesusuarios" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreUsuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="alquiler" Relationship="Self.alquiler_ibfk_3" FromRole="usuarios" ToRole="alquiler" />
+          <NavigationProperty Name="rolesusuarios" Relationship="Self.rolesusuarios_ibfk_2" FromRole="usuarios" ToRole="rolesusuarios" />
+        </EntityType>
+        <Association Name="alquiler_ibfk_1">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="alquiler" Type="Self.alquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="alquiler">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alquiler_ibfk_2">
+          <End Role="auto" Type="Self.auto" Multiplicity="1" />
+          <End Role="alquiler" Type="Self.alquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="auto">
+              <PropertyRef Name="idauto" />
+            </Principal>
+            <Dependent Role="alquiler">
+              <PropertyRef Name="idAuto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alquiler_ibfk_3">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="alquiler" Type="Self.alquiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="alquiler">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rolesusuarios_ibfk_1">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="rolesusuarios" Type="Self.rolesusuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rolesusuarios">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rolesusuarios_ibfk_2">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="rolesusuarios" Type="Self.rolesusuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rolesusuarios">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="rentacarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alquiler" EntityType="Self.alquiler" />
+          <EntitySet Name="auto" EntityType="Self.auto" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="rolesusuarios" EntityType="Self.rolesusuarios" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+          <AssociationSet Name="alquiler_ibfk_1" Association="Self.alquiler_ibfk_1">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="alquiler" EntitySet="alquiler" />
+          </AssociationSet>
+          <AssociationSet Name="alquiler_ibfk_2" Association="Self.alquiler_ibfk_2">
+            <End Role="auto" EntitySet="auto" />
+            <End Role="alquiler" EntitySet="alquiler" />
+          </AssociationSet>
+          <AssociationSet Name="alquiler_ibfk_3" Association="Self.alquiler_ibfk_3">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="alquiler" EntitySet="alquiler" />
+          </AssociationSet>
+          <AssociationSet Name="rolesusuarios_ibfk_1" Association="Self.rolesusuarios_ibfk_1">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="rolesusuarios" EntitySet="rolesusuarios" />
+          </AssociationSet>
+          <AssociationSet Name="rolesusuarios_ibfk_2" Association="Self.rolesusuarios_ibfk_2">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="rolesusuarios" EntitySet="rolesusuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="rentacarModelStoreContainer" CdmEntityContainer="rentacarEntities">
+          <EntitySetMapping Name="alquiler">
+            <EntityTypeMapping TypeName="rentacarModel.alquiler">
+              <MappingFragment StoreEntitySet="alquiler">
+                <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idAuto" ColumnName="idAuto" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="fechaAlquiler" ColumnName="fechaAlquiler" />
+                <ScalarProperty Name="fechaDevolucion" ColumnName="fechaDevolucion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="auto">
+            <EntityTypeMapping TypeName="rentacarModel.auto">
+              <MappingFragment StoreEntitySet="auto">
+                <ScalarProperty Name="idauto" ColumnName="idauto" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="estadoAlquiler" ColumnName="estadoAlquiler" />
+                <ScalarProperty Name="fotoAuto" ColumnName="fotoAuto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="rentacarModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombresCli" ColumnName="nombresCli" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="rentacarModel.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rolesusuarios">
+            <EntityTypeMapping TypeName="rentacarModel.rolesusuarios">
+              <MappingFragment StoreEntitySet="rolesusuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="fechacreacion" ColumnName="fechacreacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="rentacarModel.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
