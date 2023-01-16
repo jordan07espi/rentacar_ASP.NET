@@ -1,0 +1,57 @@
+﻿@model rentacar_ASPNET.Models.ViewModels.AutoViewModel
+@{
+    ViewBag.Title = "Agregar auto";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("Nuevo", "auto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.marca)
+                @Html.TextBoxFor(d => d.marca, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.marca, null, new { @class = "red" })
+            </div>
+
+            <div>
+                @Html.LabelFor(d => d.placa)
+                @Html.TextBoxFor(d => d.placa, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.placa, null, new { @class = "red" })
+
+            </div>
+
+            <div>
+                @Html.LabelFor(d => d.tipo)
+                @Html.TextBoxFor(d => d.tipo, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.tipo, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.estado)
+                @Html.TextBoxFor(d => d.estado, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.estado, null, new { @class = "red" })
+            </div>
+            
+
+
+            <div>
+                @Html.LabelFor(d => d.fotoAuto, htmlAttributes: new { @class = "control-label col-md-3" })<br />
+                <input type="file" name="imagenload" />
+                @Html.ValidationMessageFor(d => d.fotoAuto, "", new { @class = "red" })
+            </div>
+
+
+            <br />
+            <div>
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+}
+

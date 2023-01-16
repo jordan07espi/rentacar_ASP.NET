@@ -1,0 +1,80 @@
+﻿@model List<rentacar_ASPNET.Models.ViewModels.ListAutoViewModel>
+@{
+    ViewBag.Title = "Datos de Autos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md/12">
+        <div class="row" style="text-align: right; padding:10px">
+            <a href="~/Auto/Nuevo" class="btn btn-primary">Nuevo</a>
+        </div>
+        <table class="table btn-danger text-dark">
+            <tr>
+
+                <th>Marca</th>
+                <th>Placa</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>EstadoAlquiler</th>
+                <th>Foto</th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+
+                    <td>@oElemento.marca</td>
+                    <td>@oElemento.placa</td>
+                    <td>@oElemento.tipo</td>
+                    <td>@oElemento.estado</td>
+                    @if (@oElemento.estadoAlquiler == 1)
+                    {
+                        <td>Alquilado</td>
+                    }else{
+                    <td>No alquilado</td>}
+
+                    <td>
+                        <img width="90" src="@Url.Action("MostrarImagen", "Auto", new {id=@oElemento.idauto})" />
+                    </td>
+                    <td>
+                        <a class="btn btn-default" href="@Url.Action("Editar","Auto",new {id=@oElemento.idauto})">Editar</a>
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@oElemento.idauto">
+                            Eliminar
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="@oElemento.idauto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-danger" id="myModalLabel">Eliminar cliente</h5>
+                                        <button type="button" class="close" data-dis
+                                                miss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-danger">
+                                        ¿Está seguro que desea eliminar el registro?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary text-danger" data-dismiss="modal">Cerrar</button>
+                                        <a class="btn btn-danger text-danger" href="@Url.Action("Eliminar","Auto",new {id=@oElemento.idauto})">
+                                            Confirmar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+
+</div>
+
+

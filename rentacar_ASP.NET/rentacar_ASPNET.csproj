@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccessController.cs" />
+    <Compile Include="Controllers\AutoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\VerifySession.cs" />
     <Compile Include="Global.asax.cs">
@@ -169,6 +170,8 @@
       <DependentUpon>rentaCar.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\Access\User.cs" />
+    <Compile Include="Models\ViewModels\AutoViewModel.cs" />
+    <Compile Include="Models\ViewModels\ListAutoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +228,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Access\Index.cshtml" />
+    <Content Include="Views\Auto\Editar.cshtml" />
+    <Content Include="Views\Auto\Index.cshtml" />
+    <Content Include="Views\Auto\Nuevo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
