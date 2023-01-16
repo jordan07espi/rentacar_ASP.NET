@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace rentacar_ASP.NET.Models
+namespace rentacar_ASPNET.Models
 {
     using System;
     using System.Data.Entity;

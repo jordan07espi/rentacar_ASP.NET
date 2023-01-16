@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using System.Web.Mvc;
-using rentacar_ASP.NET.Models;
+using rentacar_ASPNET.Models;
 
 namespace rentacar_ASPNET.Controllers
 {
