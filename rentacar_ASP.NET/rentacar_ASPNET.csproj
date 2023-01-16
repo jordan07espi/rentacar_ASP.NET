@@ -164,7 +164,6 @@
     <Compile Include="Models\rolesusuarios.cs">
       <DependentUpon>rentaCar.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\usuarios.cs">
       <DependentUpon>rentaCar.tt</DependentUpon>
     </Compile>
@@ -225,6 +224,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Access\Index.cshtml" />
+    <Content Include="Views\Shared\_ForEmpleado.cshtml" />
+    <Content Include="Views\Shared\_ForAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
