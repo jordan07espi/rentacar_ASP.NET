@@ -35,9 +35,11 @@
 
                 $.post(req, frm, function (res) {
                     if (res == "1") {
-                        document.location.href="@Url.Content("~/Home/Index")";
-                    } else {
-                        alert(res);
+                        document.location.href = "@Url.Content("~/Home/Contact")";
+                    } else if (res == "2") {
+                        document.location.href = "@Url.Content("~/Home/Contact")";
+                    } else{
+                        alert(res)
                     }
                 })
 
