@@ -11,7 +11,7 @@ using rentacar_ASP.NET.Models;
 using rentacar_ASPNET.Models;
 using rentacar_ASPNET.Models.ViewModels;
 
-namespace Grupo5_ProyectoParcial2.Controllers
+namespace entacar_ASPNET.Controllers
 {
     public class AutoController : Controller
     {
